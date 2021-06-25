@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Row, Col, DatePicker, Select } from 'antd';
+import { Form, Input, Button, Row, Col, DatePicker, Select, Radio, Checkbox } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/plain.css'
@@ -14,7 +14,12 @@ function DoctorsForm() {
   const [pword, setPword] = useState('');
   const [pword2, setPword2] = useState('');
   const [gender, setGender] = useState(null);
+  const [acode, setAcode] = useState('');
   const [phone, setPhone] = useState('');
+  const [type, setType] = useState('');
+  const [tos, setTos] = useState(null);
+  const [privacy, setPrivacy] = useState(null);
+
 
   console.log(fname, lname, email, pword, pword2, gender, phone)
 
@@ -121,11 +126,35 @@ function DoctorsForm() {
           <Form.Item label="Phone Number:">
             <Row>
               <Col span={4}>
-                <PhoneInput/>
+                <PhoneInput
+                  country={'ph'}
+                  value={acode}
+                />
+              </Col>
+              <Col span={20}>
+                <Input
+                  name="mobilenumber" 
+                  type="tel"
+                  placeholder="Phone Number"
+                  maxLength={15}
+                />
               </Col>
             </Row>
           </Form.Item>
         </Col>
+        <Form.Item label="Select Type:">
+          <Radio.Group onChange={(e) => setType(e.target.value)} value={type}>
+            <Radio value={1}>Primary Care Physician</Radio>
+            <Radio value={2}>Specialist</Radio>
+          </Radio.Group>
+          <span></span>
+        </Form.Item>
+        <div>
+          <Checkbox>I have read and accept eZConsult's<Button type="link" danger>Terms of Service</Button>for the use of this App and the Services to be provided under the App.</Checkbox>
+        </div>
+        <div>
+          <Checkbox>I consent to the collection, use, processing and disclosure of my personal data by eZConsult in Terms of the<Button type="link" danger>Privacy Policy</Button>. I Confirm that all information I provide is accurate and complete.</Checkbox>
+        </div>
       </Row>
 
     </Form>
