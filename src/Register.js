@@ -11,7 +11,7 @@ const { Title } = Typography;
 const {TabPane} = Tabs;
 
 function Register() {
-  const [isDocTab, setIsDocTab] = useState(true);
+  const [tabKey, setTabKey] = useState(1);
   // const [phone, setPhone] = useState("")
   return(
     <Row>
@@ -36,7 +36,7 @@ function Register() {
                   </Title>
                 </Col>
                 <Col xs={24}>
-                  <Tabs defaultActiveKey="1" type="card" size={"small"}>
+                  <Tabs defaultActiveKey="1" type="card" size={"small"} onChange={(activeKey) => {setTabKey(activeKey)}}>
                     <TabPane tab="Sign Up as Doctor" key="1">
                     </TabPane>
                     <TabPane tab="Sign Up as Patient" key="2">
@@ -44,7 +44,7 @@ function Register() {
                   </Tabs>
                 </Col>
               </Row>
-              {isDocTab ? <DoctorsForm/> : <PatientsForm/>}
+              {tabKey === 1 ? <DoctorsForm/> : <PatientsForm/>}
             </div>
           </Col>
         </Row>
